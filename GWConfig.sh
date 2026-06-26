@@ -1,7 +1,7 @@
 #!/bin/bash
 ############################################################
 #  This script will automate the process of                #
-#  Installing and Configuring The DMRGateway-6 	           #
+#  Installing and Configuring The DMRGateway-RD            #
 #							   #
 #  VE3RD                                      2023/04/09   #
 ############################################################
@@ -42,7 +42,7 @@ echo -e '\e[1;44m'
 clear
 
 sudo mount -o remount,rw /
-homedir=/home/pi-star/DMRGateway-6/
+homedir=/home/pi-star/DMRGateway-RD/
 curdir=$(pwd)
 clear
 echo " "
@@ -364,11 +364,11 @@ function CopyBin()
 echo "Running CopyBin"
 sudo mount -o remount,rw /
 
-if [ -f /home/pi-star/DMRGateway-6/DMRGateway ]; then
+if [ -f /home/pi-star/DMRGateway-RD/DMRGateway ]; then
 	sudo mount -o remount,rw /
 	echo "Stopping DMRGateway and MMDVMHost"
 	make install
-	sudo /home/pi-star/DMRGateway-6/binupdate.sh
+	sudo /home/pi-star/DMRGateway-RD/binupdate.sh
 else
 	sudo mount -o remount,rw /
 	echo "Compiling DMRGateway Files"
@@ -391,7 +391,7 @@ echo "Test1"
 HEIGHT=15
 WIDTH=90
 CHOICE_HEIGHT=7
-BACKTITLE="This SCRIPT will Install the DMRGateway-6 by VE3RD"
+BACKTITLE="This SCRIPT will Install the DMRGateway-RD by VE3RD"
 TITLE="Secondary Menu - Raw/Basic Mode"
 MENU="Select the Network for Basic Mode"
 
@@ -443,13 +443,13 @@ function Menu()
 HEIGHT=15
 WIDTH=90
 CHOICE_HEIGHT=7
-BACKTITLE="This SCRIPT will Install the DMRGateway-6 by VE3RD"
+BACKTITLE="This SCRIPT will Install the DMRGateway-RD by VE3RD"
 TITLE="Main Menu - DMRGateway Options"
 MENU="Select your Installation Mode"
 
 OPTIONS=(1 "Create/Edit the DMRGateway Password File" 
 	 2 "Install DMRGateway & Update /etc/dmrgateway - Basic Mode"
-	 3 "Select Network for Raw/Basic Mode 0-6 (Default=0)"
+	 3 "Select Network for Raw/Basic Mode 0-RD (Default=0)"
 	 4 "Install DMRGateway & Update /etc/dmrgateway - 8 Digit Translation Mode"
 	 5 "Install DMRGateway & Update /etc/dmrgateway - 7 Digit Translation Mode"
          6 "Install DMRGateway NO Config File Update"
@@ -473,13 +473,13 @@ case $CHOICE in
         1)
             echo "Editing The DMRGateway Password File"		
 	    if [ !  -f /etc/dmrgwpass ]; then
-		cp /home/pi-star/DMRGateway-6/DMRGateway.pw /etc/dmrgwpass
+		cp /home/pi-star/DMRGateway-RD/DMRGateway.pw /etc/dmrgwpass
 	   fi
 		nano /etc/dmrgwpass
 		Menu
             ;;
          2)   echo "You Chose to Install DMRGateway - Basic Mode"
-		sudo cp /home/pi-star/DMRGateway-6/DMRGateway.ini /etc/dmrgateway
+		sudo cp /home/pi-star/DMRGateway-RD/DMRGateway.ini /etc/dmrgateway
 		CopyBin
 		GetSetInfo
 		SetNetworks
@@ -488,14 +488,14 @@ case $CHOICE in
 	  3) SelRaw
 	    ;;
          4)   echo "You Chose to Install DMRGateway - 8 Digit Translation Mode"
-		sudo cp /home/pi-star/DMRGateway-6/DMRGateway.ini /etc/dmrgateway
+		sudo cp /home/pi-star/DMRGateway-RD/DMRGateway.ini /etc/dmrgateway
 		CopyBin
 		GetSetInfo
 		SetNetworks
 		GWMode8
             ;;
          5)   echo "You Chose to Install DMRGateway - 7 Digit Translation Mode"
-		sudo cp /home/pi-star/DMRGateway-6/DMRGateway.ini /etc/dmrgateway
+		sudo cp /home/pi-star/DMRGateway-RD/DMRGateway.ini /etc/dmrgateway
 		CopyBin
 		GetSetInfo
 		SetNetworks
@@ -528,7 +528,7 @@ esac
 sudo mount -o remount,rw /
 pwf=/etc/dmrgwpass
 if [ ! /etc/dmrgwpass ]; then
- sudo cp /home/pi-star/DMRGateway-6/DMRGateway.pw /etc/dmrgwpass
+ sudo cp /home/pi-star/DMRGateway-RD/DMRGateway.pw /etc/dmrgwpass
 fi
 Menu
 echo -e '\e[1;40m'
